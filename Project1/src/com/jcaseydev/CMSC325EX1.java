@@ -48,8 +48,8 @@ public class CMSC325EX1 extends JPanel {
 
   private void drawHouse(Graphics g) {
     Graphics2D graphics2D = (Graphics2D) g;
-    Rectangle2D house = new Rectangle2D.Double(75, 150, 250, 150);
-    graphics2D.setColor(new Color(172, 143, 87));
+    Rectangle2D house = new Rectangle2D.Double(100, 150, 250, 150);
+    graphics2D.setColor(new Color(79, 25, 32));
     graphics2D.fill(house);
     graphics2D.draw(house);
 
@@ -58,8 +58,8 @@ public class CMSC325EX1 extends JPanel {
 
   private void drawDoor(Graphics g) {
     Graphics2D graphics2D = (Graphics2D) g;
-    Rectangle2D door = new Rectangle2D.Double(170, 185, 60, 115);
-    Ellipse2D doorKnob = new Ellipse2D.Double(215, 250, 10, 10);
+    Rectangle2D door = new Rectangle2D.Double(195, 185, 60, 115);
+    Ellipse2D doorKnob = new Ellipse2D.Double(240, 250, 10, 10);
 
     graphics2D.setColor(new Color(107, 68, 35));
     graphics2D.fill(door);
@@ -81,8 +81,13 @@ public class CMSC325EX1 extends JPanel {
   private void drawGrass(Graphics g) {
     Graphics2D graphics2D = (Graphics2D) g;
     Rectangle2D grass = new Double(0, 300, 400, 100);
+    Rectangle2D dirt = new Double(0, 345, 400, 25);
     graphics2D.setColor(new Color(147, 252, 81));
     graphics2D.fill(grass);
     graphics2D.draw(grass);
+
+    graphics2D.setColor(new Color(92, 67, 39));
+    graphics2D.fill(dirt);
+    graphics2D.draw(dirt);
   }
 }
