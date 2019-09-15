@@ -1,3 +1,11 @@
+////////////////////////////
+// Justin Casey
+// CMSC 325
+// Sep 13, 2019
+// Main.java: This
+// class provide the main
+// GUI.
+
 package com.jcaseydev;
 
 import javax.swing.JFrame;

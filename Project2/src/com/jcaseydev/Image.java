@@ -1,3 +1,11 @@
+////////////////////////////
+// Justin Casey
+// CMSC 325
+// Sep 13, 2019
+// Image.java: This
+// class provide image
+// definitions.
+
 package com.jcaseydev;
 
 import java.awt.Color;
@@ -5,10 +13,9 @@ import java.awt.image.BufferedImage;
 
 public class Image {
 
-  private static final int IMGSIZEX = 25; // Width of Image
-  private static final int IMGSIZEY = 25; // Height of Image
+  private static final int IMGSIZEX = 25;
+  private static final int IMGSIZEY = 25;
 
-  // Creates redSquare Image
   static int[][] redSquare = {
       {1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
       {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
@@ -37,7 +44,6 @@ public class Image {
       {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
   };
 
-  // Creates cross Image
   static int[][] cross = {
       {3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3},
       {3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3},
@@ -66,7 +72,6 @@ public class Image {
       {3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3},
   };
 
-  // Creates letter F Image
   static int[][] letterE = {
       {0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0},
       {0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0},
@@ -95,7 +100,6 @@ public class Image {
       {0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0},
   };
 
-  // Creates coloredCross Image
   static int[][] letterJ = {
       {3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3},
       {3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3},
@@ -124,7 +128,6 @@ public class Image {
       {0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0},
   };
 
-  // Creates circle Image
   static int[][] circle = {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 1, 1, 3, 3, 3, 3, 3, 3, 3, 1, 1, 0, 0, 0, 0, 0, 0, 0},
@@ -153,19 +156,13 @@ public class Image {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
   };
 
-  /**
-   * Gets data from 2D array and returns a colored image.
-   *
-   * @param data 2D array of ints that define an image
-   * @return Returns the colored image
-   */
   BufferedImage getImage(int[][] data) {
     BufferedImage image = new BufferedImage(IMGSIZEX, IMGSIZEY, BufferedImage.TYPE_INT_RGB);
 
     // Traverses 2D array with Image data
     for (int x = 0; x < IMGSIZEX; x++) {
       for (int y = 0; y < IMGSIZEY; y++) {
-        int pixelColor = data[x][y]; // Gets value from 2D array
+        int pixelColor = data[x][y];
 
         // Color pixels based on value
         if (pixelColor == 0) {
@@ -178,7 +175,7 @@ public class Image {
           pixelColor = Color.BLUE.getRGB();
         }
 
-        image.setRGB(x, y, pixelColor); // Sets color of pixel
+        image.setRGB(x, y, pixelColor);
       }
     }
 

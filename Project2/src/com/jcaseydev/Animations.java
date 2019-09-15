@@ -1,3 +1,12 @@
+////////////////////////////
+// Justin Casey
+// CMSC 325
+// Sep 13, 2019
+// Animations.java: This
+// class provide methods
+// needed to animate
+// the images.
+
 package com.jcaseydev;
 
 import java.awt.Color;
@@ -16,6 +25,7 @@ class Animations extends JPanel {
   private static double rot = 0.0;
   private static double scaleX = 1.0;
   private static double scaleY = 1.0;
+  private float pixelSize;
 
   // create all of the images
   private Image image = new Image();
@@ -56,24 +66,30 @@ class Animations extends JPanel {
     AffineTransform savedTransform = g2.getTransform();
     System.out.println("Frame is " + frameNumber);
     switch (frameNumber) {
-      case 1: // First frame is unmodified.
+      case 0:
         translateX = 0;
         translateY = 0;
         scaleX = 1.0;
         scaleY = 1.0;
         rot = 0;
         break;
-      case 2: // Second frame translates each image by (-9, 5).
-        translateX = -9;
-        translateY = 5;
+      case 1:
+        translateX += 10;
         break;
-      case 3: // Third frame rotates each image by 60 degrees Counter
-        translateX = -9;
-        translateY = 5;
-        rot = 60 * Math.PI / 180.0;
+      case 2:
+        translateY += 12;
         break;
-      // Can add more cases as needed
-      default:
+      case 3:
+        rot += 55 * Math.PI / 180.0;
+        break;
+      case 4:
+        rot += -75 * Math.PI / 180.0;
+        break;
+      case 5:
+        scaleX = 3.0;
+        break;
+      case 6:
+        scaleY = 1.5;
         break;
     } // End switch
 
@@ -120,6 +136,6 @@ class Animations extends JPanel {
     g2.translate(-left, -top);
     double pixelWidth = Math.abs((right - left) / width);
     double pixelHeight = Math.abs((bottom - top) / height);
-    //pixelSize = (float) Math.max(pixelWidth, pixelHeight);
+    pixelSize = (float) Math.max(pixelWidth, pixelHeight);
   }
 }
