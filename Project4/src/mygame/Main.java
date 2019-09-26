@@ -14,6 +14,7 @@ import com.jme3.scene.Spatial;
 import com.jme3.scene.control.CameraControl.ControlDirection;
 import com.jme3.texture.Texture;
 import com.jme3.texture.Texture.WrapMode;
+import com.jme3.util.SkyFactory;
 
 /**
  * This is the Main Class of your Game. You should only do initialization here.
@@ -27,99 +28,75 @@ public class Main extends SimpleApplication {
         app.start();
     }
     
-    protected Node playerNode;
-    protected Spatial player;
+    Node playerNode;
+    Spatial player;
 
     @Override
     public void simpleInitApp() {
         
+        // sky
+        rootNode.attachChild(SkyFactory.createSky(getAssetManager(),
+                "Textures/Sky/Bright/FullskiesBlueClear03.dds",
+                SkyFactory.EnvMapType.CubeMap));
+        
         Node ground = new Node("ground");
         
-        // world
+        // ground
         Spatial terrain = assetManager.loadModel("Models/Terrain/Terrain.mesh.xml");
-        Material mat_terrain = new Material(assetManager, "Common/MatDefs/Terrain/Terrain.j3md");
-        mat_terrain.setTexture("Alpha", assetManager.loadTexture("Textures/Terrain/splat/alpha1.png"));
-        Texture dirt = assetManager.loadTexture("Textures/Terrain/splat/dirt.jpg");
-        Texture grass = assetManager.loadTexture("Textures/Terrain/splat/grass.jpg");
-        grass.setWrap(WrapMode.Repeat);
-        dirt.setWrap(WrapMode.Repeat);
-        mat_terrain.setTexture("Tex1", grass);
-        mat_terrain.setFloat("Tex1Scale", 64f);
-        mat_terrain.setTexture("Tex1", grass);
-        mat_terrain.setFloat("Tex2Scale", 64f);
-        mat_terrain.setTexture("Tex3", dirt);
-        mat_terrain.setFloat("Tex3Scale", 128f);
-        terrain.setMaterial(mat_terrain);
-        terrain.scale(50);
+        Material terrain_material = new Material(assetManager, "Common/MatDefs/Terrain/Terrain.j3md");
+        terrain_material.setTexture("Alpha", assetManager.loadTexture("Textures/Terrain/splat/alpha1.png"));
+        Texture dirt_texture = assetManager.loadTexture("Textures/Terrain/splat/dirt.jpg");
+        Texture grass_texture = assetManager.loadTexture("Textures/Terrain/splat/grass.jpg");
+        grass_texture.setWrap(WrapMode.Repeat);
+        dirt_texture.setWrap(WrapMode.Repeat);
+        terrain_material.setTexture("Tex1", grass_texture);
+        terrain_material.setFloat("Tex1Scale", 64f);
+        terrain_material.setTexture("Tex2", dirt_texture);
+        terrain_material.setFloat("Tex2Scale", 128f);
+        terrain_material.setTexture("Tex3", dirt_texture);
+        terrain_material.setFloat("Tex3Scale", 64f);
+        terrain.setMaterial(terrain_material);
+        terrain.scale(100);
         terrain.setLocalTranslation(0, -1, 0);
         ground.attachChild(terrain);
         
         rootNode.attachChild(ground);
         
         // player
-        playerNode = new Node("playerNone");
+        playerNode = new Node("playerNode");
         
         player = assetManager.loadModel("Models/Buggy/Buggy.j3o");
-        player.scale(0.1f);
-        
-        Quaternion q = new Quaternion();
-        q.fromAngles(0, 1.5708f, 0);
+        Material buggy_material = new Material(
+            assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
+        buggy_material.setTexture("ColorMap",
+                    assetManager.loadTexture("Textures/Terrain/BrickWall/BrickWall.jpg"));
+        player.setMaterial(buggy_material);
+        player.scale(0.2wf);
         
         player.setLocalTranslation(0, -0.5f, 0);
+        
+        // middle of screen
+        Quaternion q = new Quaternion();
+        q.fromAngles(0, 1.57f, 0);
         player.setLocalRotation(q);
         
         playerNode.attachChild(player);
         
         // camera
         flyCam.setEnabled(false);
-        CameraNode camNode = new CameraNode("Camera Node", cam);
+        CameraNode camNode = new CameraNode("Camera", cam);
         camNode.setControlDir(ControlDirection.SpatialToCamera);
         playerNode.attachChild(camNode);
         
-        camNode.setLocalTranslation(new Vector3f(-4,.35f,0));
+        camNode.setLocalTranslation(new Vector3f(-3,.4f,0));
         camNode.setLocalRotation(q);
         
         playerNode.setLocalTranslation(new Vector3f(0,0,10));
         
         rootNode.attachChild(playerNode);
 
+        // setting up controls
         initKeys();
-        
-        
-        
-//        Spatial teapot = assetManager.loadModel("Models/Teapot/Teapot.obj");
-//        Material mat_default = new Material(
-//            assetManager, "Common/MatDefs/Misc/ShowNormals.j3md");
-//        teapot.setMaterial(mat_default);
-//        rootNode.attachChild(teapot);
-//        
-//        Box box = new Box(2.5f, 2.5f, 1.0f);
-//        Spatial wall = new Geometry("Box", box);
-//        Material mat_brick = new Material(
-//            assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
-//        mat_brick.setTexture("ColorMap",
-//                    assetManager.loadTexture("Textures/Terrain/BrickWall/BrickWall.jpg"));
-//        wall.setMaterial(mat_brick);
-//        wall.setLocalTranslation(2.0f, -2.5f, 0.0f);
-//        rootNode.attachChild(wall);
-//        
-//        guiNode.detachAllChildren();
-//        guiFont = assetManager.loadFont("Interface/Fonts/Default.fnt");
-//        BitmapText helloText = new BitmapText(guiFont, false);
-//        helloText.setSize(guiFont.getCharSet().getRenderedSize());
-//        helloText.setText("Hello World");
-//        helloText.setLocalTranslation(300, helloText.getLineHeight(), 0);
-//        guiNode.attachChild(helloText);
-//        
-//        Spatial ninja = assetManager.loadModel("Models/Ninja/Ninja.mesh.xml");
-//        ninja.scale(0.05f, 0.05f, 0.05f);
-//        ninja.rotate(0.0f, -3.0f, 0.0f);
-//        ninja.setLocalTranslation(0.0f, -5.0f, -2.0f);
-//        rootNode.attachChild(ninja);
-//        // You must add a light to make the model visible
-//        DirectionalLight sun = new DirectionalLight();
-//        sun.setDirection(new Vector3f(-0.1f, -0.7f, -1.0f));
-//        rootNode.addLight(sun);
     }
     
     private void initKeys() {
