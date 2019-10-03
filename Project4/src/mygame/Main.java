@@ -50,11 +50,11 @@ public class Main extends SimpleApplication {
         grass_texture.setWrap(WrapMode.Repeat);
         dirt_texture.setWrap(WrapMode.Repeat);
         terrain_material.setTexture("Tex1", grass_texture);
-        terrain_material.setFloat("Tex1Scale", 64f);
-        terrain_material.setTexture("Tex2", dirt_texture);
-        terrain_material.setFloat("Tex2Scale", 128f);
-        terrain_material.setTexture("Tex3", dirt_texture);
-        terrain_material.setFloat("Tex3Scale", 64f);
+        terrain_material.setFloat("Tex1Scale", 256f);
+        terrain_material.setTexture("Tex2", grass_texture);
+        terrain_material.setFloat("Tex2Scale", 256f);
+        terrain_material.setTexture("Tex3", grass_texture);
+        terrain_material.setFloat("Tex3Scale", 256f);
         terrain.setMaterial(terrain_material);
         terrain.scale(100);
         terrain.setLocalTranslation(0, -1, 0);
@@ -71,7 +71,7 @@ public class Main extends SimpleApplication {
         buggy_material.setTexture("ColorMap",
                     assetManager.loadTexture("Textures/Terrain/BrickWall/BrickWall.jpg"));
         player.setMaterial(buggy_material);
-        player.scale(0.2wf);
+        player.scale(0.2f);
         
         player.setLocalTranslation(0, -0.5f, 0);
         
@@ -121,10 +121,10 @@ public class Main extends SimpleApplication {
                 playerNode.move(v.mult(tpf).mult(-speed));
             }
             if (name.equals("Left")) {
-                playerNode.rotate(0, value*speed, 0);
+                playerNode.rotate(0, -value*speed, 0);
             }
             if (name.equals("Right")) {
-                playerNode.rotate(0, -value*speed, 0);
+                playerNode.rotate(0, value*speed, 0);
             }
         }    
     };
